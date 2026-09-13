@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Meri Cuite!</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        /* ================= PASSWORD SCREEN ================= */
+        
+        #password-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        }
+        
+        .password-box {
+            width: 90%;
+            max-width: 400px;
+            padding: 35px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.3);
+        }
+        
+        .password-box h2 {
+            color: #FF1493;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .password-box p {
+            color: #8A2BE2;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        #password {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #FF1493;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            outline: none;
+            margin-bottom: 15px;
+        }
+        
+        .password-box button {
+            padding: 13px 35px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #FF1493, #8A2BE2);
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .password-box button:hover {
+            transform: scale(1.05);
+        }
+        
+        #password-error {
+            color: #d00000;
+            margin-top: 15px;
+            min-height: 20px;
+        }
+        /* ================= BIRTHDAY PAGE ================= */
+        
+        #birthday-content {
+            display: none;
+        }
+        
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.3);
+        }
+        
+        .container:hover {
+            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.5);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            color: #FF1493;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: bounce-in 1.5s forwards 0.5s;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: #8A2BE2;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
+        }
+        
+        .next-button {
+            padding: 1rem 3rem;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, #FF1493, #8A2BE2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.5);
+            transition: 0.3s;
+        }
+        
+        .next-button:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        /* ================= AUDIO ================= */
+        
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .audio-controls button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #FF1493;
+            margin-right: 10px;
+        }
+        
+        .audio-controls input {
+            width: 100px;
+        }
+        /* ================= FLOATING ELEMENTS ================= */
+        
+        .confetti,
+        .balloon,
+        .heart,
+        .star {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+        }
+        /* ================= ANIMATIONS ================= */
+        
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width:768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            .container {
+                width: 90%;
+                padding: 1.5rem;
+            }
+            .next-button {
+                padding: 0.8rem 2rem;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= PASSWORD SCREEN ================= -->
+
+    <div id="password-screen">
+
+        <div class="password-box">
+
+            <h2>🎁 A Little Surprise 🎂</h2>
+
+            <p>Enter the secret code 💕</p>
+
+            <input type="password" id="password" inputmode="numeric" maxlength="4" placeholder="••••">
+
+            <button onclick="checkPassword()">
+            Unlock ✨
+        </button>
+
+            <p id="password-error"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= BIRTHDAY CONTENT ================= -->
+
+    <div id="birthday-content">
+
+        <div class="container">
+
+            <h1>
+                Happy Birthday,<br> Meri Cuite!<br> 🎉🎂
+            </h1>
+
+            <div class="subtitle">
+                Sona Babiyaaaa! Apke liye ak special surprise? 💕
+            </div>
+
+            <button class="next-button" onclick="goToNextPage()">
+            Let's Go! ✨
+        </button>
+
+        </div>
+
+
+        <!-- AUDIO CONTROLS -->
+
+        <div class="audio-controls">
+
+            <button id="play-pause">
+            ▶️
+        </button>
+
+            <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
+
+        </div>
+
+
+        <audio id="birthday-song" loop>
+
+        <source
+            src="Audio/I Wish You Happy Birthday Song Mp3 Ringtone Download Audio.mp3"
+            type="audio/mp3"
+        >
+
+    </audio>
+
+    </div>
+
+
+    <script>
+        /* =====================================================
+                                                                                                           NUMERIC PASSWORD
+                                                                                                           ===================================================== */
+
+        const SECRET_PASSWORD = "0212";
+
+        function checkPassword() {
+
+            const enteredPassword =
+                document.getElementById("password").value;
+
+            const errorMessage =
+                document.getElementById("password-error");
+
+            if (enteredPassword === SECRET_PASSWORD) {
+
+                document.getElementById("password-screen").style.display = "none";
+
+                document.getElementById("birthday-content").style.display = "block";
+
+                /* Start music after password is entered */
+                const audio =
+                    document.getElementById("birthday-song");
+
+                audio.play().catch(() => {});
+
+                document.getElementById("play-pause").innerHTML = "⏸️";
+
+            } else {
+
+                errorMessage.textContent =
+                    "Wrong code 😜 Try again!";
+
+                document.getElementById("password").value = "";
+
+            }
+        }
+
+
+        /* Press ENTER to unlock */
+
+        document.getElementById("password").addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+                    checkPassword();
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           AUDIO
+           ===================================================== */
+
+        const audio =
+            document.getElementById("birthday-song");
+
+        const playPauseBtn =
+            document.getElementById("play-pause");
+
+        const volumeControl =
+            document.getElementById("volume");
+
+        let isPlaying = false;
+
+        audio.volume = volumeControl.value;
+
+
+        playPauseBtn.addEventListener("click", function() {
+
+            if (isPlaying) {
+
+                audio.pause();
+
+                playPauseBtn.innerHTML = "▶️";
+
+                isPlaying = false;
+
+            } else {
+
+                audio.play();
+
+                playPauseBtn.innerHTML = "⏸️";
+
+                isPlaying = true;
+
+            }
+
+        });
+
+
+        volumeControl.addEventListener("input", function() {
+
+            audio.volume = volumeControl.value;
+
+        });
+
+
+        /* =====================================================
+           NEXT PAGE
+           ===================================================== */
+
+        function goToNextPage() {
+
+            window.location.href = "memorylane.html";
+
+        }
+
+
+        /* =====================================================
+           FLOATING ELEMENTS
+           ===================================================== */
+
+        function createFloatingElements() {
+
+            const colors = [
+                "#FF1493",
+                "#8A2BE2",
+                "#FFD700",
+                "#FF4500",
+                "#00BFFF",
+                "#32CD32"
+            ];
+
+            const elements = [
+                "confetti",
+                "balloon",
+                "heart",
+                "star"
+            ];
+
+            const shapes = [
+                "▲", "■", "●", "★", "♥", "♦", "✦", "✧"
+            ];
+
+
+            for (let i = 0; i < 50; i++) {
+
+                setTimeout(function() {
+
+                    const element =
+                        document.createElement("div");
+
+                    const type =
+                        elements[
+                            Math.floor(
+                                Math.random() * elements.length
+                            )
+                        ];
+
+                    element.className = type;
+
+                    element.style.left =
+                        Math.random() * 100 + "vw";
+
+                    element.style.top = "-30px";
+
+
+                    if (type === "confetti") {
+
+                        element.innerHTML =
+                            shapes[
+                                Math.floor(
+                                    Math.random() * shapes.length
+                                )
+                            ];
+
+                        element.style.color =
+                            colors[
+                                Math.floor(
+                                    Math.random() * colors.length
+                                )
+                            ];
+
+                        element.style.fontSize =
+                            (Math.random() * 20 + 10) + "px";
+
+                    } else if (type === "balloon") {
+
+                        element.innerHTML = "🎈";
+
+                        element.style.fontSize =
+                            (Math.random() * 30 + 20) + "px";
+
+                    } else if (type === "heart") {
+
+                        element.innerHTML = "❤️";
+
+                        element.style.fontSize =
+                            (Math.random() * 20 + 10) + "px";
+
+                    } else if (type === "star") {
+
+                        element.innerHTML = "✨";
+
+                        element.style.fontSize =
+                            (Math.random() * 15 + 10) + "px";
+
+                    }
+
+
+                    document.body.appendChild(element);
+
+
+                    const duration =
+                        Math.random() * 6 + 5;
+
+
+                    element.animate(
+                        [{
+                            transform: "translateY(0) rotate(0deg)",
+                            opacity: 1
+                        }, {
+                            transform: "translateY(" +
+                                (window.innerHeight + 100) +
+                                "px) rotate(360deg)",
+                            opacity: 0.8
+                        }], {
+                            duration: duration * 1000,
+                            easing: "linear"
+                        }
+                    );
+
+
+                    setTimeout(function() {
+
+                        if (element.parentNode) {
+                            element.remove();
+                        }
+
+                    }, duration * 1000);
+
+
+                }, i * 150);
+
+            }
+
+        }
+
+
+        /* Start effects */
+
+        createFloatingElements();
+
+        setInterval(createFloatingElements, 5000);
+    </script>
+
+</body>
+
+</html>
